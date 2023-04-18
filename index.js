@@ -1,6 +1,8 @@
 const whatsappClient = require('./whatsapp-client');
 const scraper = require('./scrap-website');
 const dotenv = require('dotenv');
+// Comment this line if you don't want to ping the server to keep it alive
+const { pingForever } = require('./ping-forever');
 
 dotenv.config();
 
@@ -69,3 +71,6 @@ async function run() {
 }
 
 run();
+
+// Comment this line if you don't want to ping the server to keep it alive
+pingForever();
