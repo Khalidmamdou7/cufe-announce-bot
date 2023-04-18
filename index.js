@@ -73,4 +73,4 @@ async function run() {
 run();
 
 // Comment this line if you don't want to ping the server to keep it alive
-pingForever();
+// pingForever();
