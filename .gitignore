@@ -1,0 +1,7 @@
+node_modules/
+announcements/
+main_announcements.json
+programs_announcements.json
+.wwebjs_auth/
+
+.env
