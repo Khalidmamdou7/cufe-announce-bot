@@ -1,4 +1,5 @@
 const https = require("https");
+const http = require('http');
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
@@ -10,26 +11,55 @@ app.listen(PORT, () => {
 }
 );
 
-// the app somehow recognizes if bot or human is using it, so we need to add a user agent to make it think we are a human
-const options = {
-    headers: {
-        "User-Agent": "Mozilla/5.0",
-    },
-};
-
 function pingForever() {
     setInterval(() => {
-        https.get(
-            `https://${process.env.MY_DOMAIN}/`,
-            options,
-            (res) => {
-                console.log(`Response status: ${res.statusCode}`);
-                if (res.statusCode === 200) {
-                    console.log('Server is up');
-                }
+        try {
+            if (process.env.NODE_ENV === 'production') {
+                const options = {
+                    hostname: process.env.PRODUCTION_URL,
+                    path: '/',
+                    method: 'GET',
+                    // the app somehow recognizes if bot or human is using it, so we need to add a user agent to make it think we are a human
+                    headers: {
+                        "User-Agent": "Mozilla/5.0",
+                    },
+                
+                };
+                console.log('Pinging the server...');
+                const req = https.request(options, res => {
+                    console.log(`statusCode: ${res.statusCode}`);
+                });
+
+                req.on('error', error => {
+                    console.error(error);
+                });
+
+                req.end();
+
             }
-        );
-    }, 240000);
+            else {
+                const options = {
+                    hostname: 'localhost',
+                    port: PORT,
+                    path: '/',
+                    method: 'GET'
+                };
+
+                const req = http.request(options, res => {
+                    console.log(`statusCode: ${res.statusCode}`);
+                });
+
+                req.on('error', error => {
+                    console.error(error);
+                });
+
+                req.end();
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
+    }, 5 * 60 * 1000); // every 5 minutes 
 
 
     return true;

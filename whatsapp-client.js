@@ -6,7 +6,7 @@ function whatsappClient(newMainAnnouncements, newProgramsAnnouncements) {
     console.log("Running whatsapp client...");
     const client = new Client({
         puppeteer: {
-            headless: true,
+            headless: true, 
             args: ["--no-sandbox", "--disable-setuid-sandbox"],
         },
         authStrategy: new LocalAuth(),
