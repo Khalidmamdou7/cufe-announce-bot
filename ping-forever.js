@@ -3,7 +3,7 @@ const http = require('http');
 const express = require("express");
 const app = express();
 app.get("/", (request, response) => {
-    response.sendStatus(200);
+    response.json({ message: "Hello World" });
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

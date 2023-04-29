@@ -2,7 +2,7 @@ const whatsappClient = require('./whatsapp-client');
 const scraper = require('./scrap-website');
 const dotenv = require('dotenv');
 // Comment this line if you don't want to ping the server to keep it alive
-const { pingForever } = require('./ping-forever');
+// const { pingForever } = require('./ping-forever');
 
 dotenv.config();
 
@@ -15,10 +15,15 @@ async function main() {
     console.log('Running main function');
     // Check if the client is already running
     if (!client) {
-        [newMainAnnouncements, newProgramsAnnouncements] = await Promise.all([
-            scraper.scrapeMainAnnouncementsPage(),
-            scraper.scrapeProgramsAnnouncementsPage(),
-        ]);
+        try {
+            [newMainAnnouncements, newProgramsAnnouncements] = await Promise.all([
+                scraper.scrapeMainAnnouncementsPage(),
+                scraper.scrapeProgramsAnnouncementsPage(),
+            ]);
+        } catch (err) {
+            console.log(err);
+            return;
+        }
 
         if (!newMainAnnouncements.length && !newProgramsAnnouncements.length) {
             console.log('No new announcements found');
@@ -66,7 +71,7 @@ async function run() {
     while (true) {
         await main();
         // Wait for 5 minutes
-        await new Promise((resolve) => setTimeout(resolve, 1 * 60 * 1000));
+        await new Promise((resolve) => setTimeout(resolve, 5 * 60 * 1000));
     }
 }
 
