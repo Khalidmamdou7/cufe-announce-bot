@@ -30,6 +30,13 @@ async function main() {
             return;
         }
 
+        // An unknown error occures which returns all the announcements as new announcements, this is a temporary fix
+        if (newMainAnnouncements.length > 10) {
+            newMainAnnouncements = [];
+        }
+        if (newProgramsAnnouncements.length > 5) {
+            newProgramsAnnouncements = [];
+        }
         if (newMainAnnouncements.length || newProgramsAnnouncements.length) {
 
             ackCount = 0;
