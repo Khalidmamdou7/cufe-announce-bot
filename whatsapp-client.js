@@ -33,11 +33,11 @@ function whatsappClient(newMainAnnouncements, newProgramsAnnouncements) {
         const chat = process.env.WHATSAPP_CHAT_ID;
 
         if (!newMainAnnouncements.length && !newProgramsAnnouncements.length) {
-            const message = "السلام عليكم ورحة الله وبركاته،\n\nلم يتم العثور على اعلانات جديدة على موقع الجامعة.\n\nهذه الرسالة تم ارسالها تلقائيا، تحياتي.";
+            const message = "السلام عليكم ورحمة الله وبركاته،\n\nلم يتم العثور على اعلانات جديدة على موقع الجامعة.\n\nهذه الرسالة تم ارسالها تلقائيا، تحياتي.";
             client.sendMessage(chat, message);
             return;
         }
-        let message = `السلام عليكم ورحة الله وبركاته،\n\nتم نشر اعلانات جديدة على موقع الجامعة، ستجدها مرفقة مع الرسالة بجانب الروابط الخاصة بها:\n`;
+        let message = `السلام عليكم ورحمة الله وبركاته،\n\nتم نشر اعلانات جديدة على موقع الجامعة، ستجدها مرفقة مع الرسالة بجانب الروابط الخاصة بها:\n`;
         message += `\n\nالاعلانات الرئيسية:\n`;
         newMainAnnouncements.forEach((link) => {
             message += `${link}\n`;
@@ -46,7 +46,6 @@ function whatsappClient(newMainAnnouncements, newProgramsAnnouncements) {
         newProgramsAnnouncements.forEach((link) => {
             message += `${link}\n`;
         });
-        message += `\n\nهذه الرسالة تم ارسالها تلقائيا، تحياتي.`;
         client.sendMessage(chat, message);
         newMainAnnouncements.forEach((link) => {
             const fileName = link.split("/").pop();
