@@ -2,6 +2,12 @@
 
 This a simple bot that scraps [CUFE - CHS's announcements page](http://eng.cu.edu.eg/en/credit-hour-system/) and sends the new announcements to a whatsapp group. It is written in node.js and uses [whatsapp-web.js] to send the messages.
 
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/user-attachments/assets/60951920-fda7-4b26-abe7-620c153ae30c" alt="Announcement's website" width="500"/>
+  <img src="https://github.com/user-attachments/assets/d58fbbd3-0ef7-4326-9790-5ef113b22cc9" alt="Message sent to whatsapp group" width="300"/>
+</div>
+
+
 ## How to use
 
 1. Clone the repo
